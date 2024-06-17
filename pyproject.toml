@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "stock-market"
+version = "0.1.0"
+description = ""
+authors = ["mkizawa930 <m.kappa930@gmail.com>"]
+# readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ta-lib = "^0.4.30"
+yfinance = "^0.2.40"
+pytest = "^8.2.2"
+isort = "^5.13.2"
+black = "^24.4.2"
+flake8 = "^7.1.0"
+joblib = "^1.4.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
