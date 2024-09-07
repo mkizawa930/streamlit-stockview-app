@@ -3,19 +3,17 @@ import pandas as pd
 import talib as ta
 from pylab import plt
 
-from stockview.data import fetch
-
 
 def analyze(df):
-    df["highest"] = df["high"].rolling(20).max().shift(1)
-    df["lowest"] = df["low"].rolling(20).min().shift(1)
+    df["highest"] = df["high"].rolling(14).max().shift(1)
+    df["lowest"] = df["low"].rolling(14).min().shift(1)
 
     atr = ta.ATR(df["high"], df["low"], df["close"], timeperiod=20)
     df["upper"] = df["close"] + 2 * atr.shift(1)
     df["lower"] = df["close"] - 2 * atr.shift(1)
 
-    df["upper_breaks_count"] = (df["highest"] <= df["high"]).rolling(10).sum()
-    df["lower_breaks_count"] = (df["lowest"] >= df["low"]).rolling(10).sum()
+    df["upper_breaks_count"] = (df["high"] >= df["highest"]).rolling(10).sum()
+    df["lower_breaks_count"] = (df["low"] <= df["lowest"]).rolling(10).sum()
 
     bbands_upper, bbands_middle, bbands_lower = ta.BBANDS(
         df["close"], timeperiod=14, nbdevup=2, nbdevdn=2, matype=0
@@ -45,9 +43,3 @@ def create_analyzed_chart(df: pd.DataFrame):
     plt.tight_layout()
     plt.legend(loc="upper left")
     return fig, axes
-
-
-if __name__ == "__main__":
-    df = fetch("^N225", period="1y")
-    analyze(df)
-    create_analyzed_chart(df)

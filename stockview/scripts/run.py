@@ -12,8 +12,8 @@ from matplotlib import pyplot as plt
 from table2ascii import PresetStyle
 from table2ascii import table2ascii as t2a
 
-from stockview import analysis
-from stockview.data import fetch
+from stockview.app import analysis
+from stockview.app.data import fetch
 
 logger = getLogger("discord")
 
@@ -93,4 +93,5 @@ async def on_ready():
 #     channel = client.get_channel(1090980455714672751)
 #     await channel.send("テスト")
 
-client.run(TOKEN)
+if __name__ == "__main__":
+    client.run(TOKEN)

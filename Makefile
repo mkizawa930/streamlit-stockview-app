@@ -1,2 +1,2 @@
 run:
-	poetry run python ./scripts/demo.py
+	poetry run streamlit run ./stockview/app/dashboard.py
