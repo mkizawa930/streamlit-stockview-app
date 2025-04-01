@@ -73,9 +73,9 @@ def on_change_symbol():
     st.session_state.symbol = st.session_state.symbol_input
 
 
-st.sidebar.title("Chart Viewer")
+st.sidebar.title("株価チャート")
 
-st.sidebar.subheader("Chart Options")
+st.sidebar.subheader("オプション")
 
 # session stateの初期化
 if "inputs" not in st.session_state:
@@ -91,16 +91,16 @@ if "symbol_input" not in st.session_state:
     st.session_state.symbol_input = "^GSPC"
 
 
-st.title("株価Dashboard")
+# st.title("株価チャート")
 
-# Sidebar
-col1, col2 = st.columns(2, vertical_alignment="bottom")
+# # Sidebar
+# col1, col2 = st.columns(2, vertical_alignment="bottom")
 
-with col1:
-    value = st.session_state.symbol_input = st.sidebar.selectbox(
-        "シンボルを選択",
-        ["^GSPC", "^IXIC", "^N225"],
-    )
+# with col1:
+#     value = st.session_state.symbol_input = st.sidebar.selectbox(
+#         "銘柄を選択",
+#         ["^GSPC", "^IXIC", "^N225"],
+#     )
 
 # with col2:
 #     st.sidebar.button("Change", on_click=on_change_symbol)

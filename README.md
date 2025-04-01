@@ -1,24 +1,12 @@
 # README.md
 
-`streamlit.py`でお試しに作ってみた、株価表示アプリ
+`streamlit.py`でお試しに作ってみた、株価チャートアプリ
 
 
-```shell
-uv run python
-
-uv add <package-name>
-
-uv sync
-
-uv python <version>
-
-uv pip list
-```
-
-## Streamlit
+## 起動
 
 ```shell
-python -m streamlit <path/to/script>
+uv run python -m streamlit run ./app/main.py
 ```
 
 

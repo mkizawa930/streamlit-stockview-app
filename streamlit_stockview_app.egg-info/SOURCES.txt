@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+app/__init__.py
+app/analysis.py
+app/main.py
+streamlit_stockview_app.egg-info/PKG-INFO
+streamlit_stockview_app.egg-info/SOURCES.txt
+streamlit_stockview_app.egg-info/dependency_links.txt
+streamlit_stockview_app.egg-info/requires.txt
+streamlit_stockview_app.egg-info/top_level.txt
