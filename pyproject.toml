@@ -11,3 +11,9 @@ dependencies = [
     "ta-lib>=0.5.2",
     "yfinance>=0.2.55",
 ]
+
+[tool.uv]
+dev-dependencies = [
+    "isort>=6.0.1",
+    "ruff>=0.11.2",
+]

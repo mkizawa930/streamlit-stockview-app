@@ -9,11 +9,10 @@ import discord.ext.commands as commands
 import mdutils
 from dotenv import load_dotenv
 from matplotlib import pyplot as plt
-from table2ascii import PresetStyle
-from table2ascii import table2ascii as t2a
-
 from stockview.app import analysis
 from stockview.app.data import fetch
+from table2ascii import PresetStyle
+from table2ascii import table2ascii as t2a
 
 logger = getLogger("discord")
 
