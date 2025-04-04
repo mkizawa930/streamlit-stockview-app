@@ -37,6 +37,9 @@ if "inputs" not in st.session_state:
 if "period" not in st.session_state:
     st.session_state.period = "6mo"
 
+if "interval" not in st.session_state:
+    st.session_state.interval = "1d"
+
 if "symbol" not in st.session_state:
     st.session_state.symbol = "^GSPC"
 
@@ -45,19 +48,27 @@ if "symbol_input" not in st.session_state:
 
 st.title("株価チャート")
 
-# 銘柄: テキスト入力
-#
-symbol_input = st.text_input(
-    "銘柄",
-    key="symbol_input",
-    on_change=on_change_symbol,
-    placeholder="銘柄名を入力: ^GSPC",
-)
+with st.sidebar:
+    st.header("検索条件")
+    # 銘柄: テキスト入力
+    symbol_input = st.text_input(
+        "銘柄(Symbol)",
+        key="symbol_input",
+        on_change=on_change_symbol,
+        placeholder="銘柄名を入力: ^GSPC",
+    )
 
+    st.session_state.period = st.selectbox(
+        "期間(Period)", ["1mo", "3mo", "6mo", "1y", "2y", "5y"], index=1
+    )  # 2y, 5y
 
-st.session_state.period = st.selectbox(
-    "期間", ["1mo", "3mo", "6mo", "1y", "2y", "5y"], index=1
-)  # 2y, 5y
+    st.session_state.interval = st.selectbox(
+        "間隔(Interval)",
+        ["1m", "5m", "15m", "30m", "1h", "1d"],
+        index=5,
+    )
+    st.write("")
+    st.button("検索", use_container_width=True)
 
 df = None
 try:
@@ -75,27 +86,33 @@ except Exception as e:
     show_error_dialog(str(e))
 
 if df is not None:
-    fig = make_candlestick_chart(df, symbol=st.session_state.symbol)
-    st.plotly_chart(fig)
-    ## Indicator
-    st.button("テクニカル指標を追加", on_click=add_input)
-
-    for i in st.session_state.inputs:
-        col1, col2, col3 = st.columns(3, vertical_alignment="bottom")
-
-        with col1:
-            st.selectbox(
-                "テクニカル指標", ["MA", "Bollinger Band"], key=f"indicator_select_{i}"
-            )
-
-        with col2:
-            st.text_input("期間", key=f"indicator_text_{i}")
-
-        with col3:
-            st.button("削除", on_click=delete_input(i), key=f"indicator_del_button_{i}")
-
     if st.checkbox("データを表示する"):
         st.write(df)
+
+    fig = make_candlestick_chart(
+        df, symbol=st.session_state.symbol, title=f"symbol={st.session_state.symbol}"
+    )
+    st.plotly_chart(fig)
+    # TODO
+
+    # ## Indicator
+    # st.button("テクニカル指標を追加", on_click=add_input)
+
+    # for i in st.session_state.inputs:
+    #     col1, col2, col3 = st.columns(3, vertical_alignment="bottom")
+
+    #     with col1:
+    #         st.selectbox(
+    #             "テクニカル指標", ["MA", "Bollinger Band"], key=f"indicator_select_{i}"
+    #         )
+
+    #     with col2:
+    #         st.text_input("期間", key=f"indicator_text_{i}")
+
+    #     with col3:
+    #         st.button("削除", on_click=delete_input(i), key=f"indicator_del_button_{i}")
+
+
 else:
     st.error("データがありません。")
 

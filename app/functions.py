@@ -71,7 +71,7 @@ def get_historical_data(symbol: str, period: str, interval: str = "1d"):
 
 
 # plotlyでローソク足チャートを作成する
-def make_candlestick_chart(df, symbol):
+def make_candlestick_chart(df: pd.DataFrame, symbol: str, title: str):
     fig = go.Figure(
         data=[
             go.Candlestick(
@@ -88,7 +88,7 @@ def make_candlestick_chart(df, symbol):
             # go.Scatter(x=df.index, y=df["close-ATR"], name="close-ATR"),
         ],
         layout={
-            "title": "Candlestick Chart",
+            "title": title,
         },
     )
     fig.update_layout(yaxis=dict(autorange=True, fixedrange=False))
